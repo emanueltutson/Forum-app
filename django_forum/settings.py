@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from pickle import TRUE
+import os
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,8 +30,10 @@ SECRET_KEY = 'django-insecure-!fl1z4cmxcpd==0#uba^k7t6kx-q$0=$2e(q7o6m5x-3h2r%e%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["*"]
+X_FRAME_OPTIONS = "*"
+CORS_ORIGIN_ALLOW_ALL = TRUE
+CSRF_TRUSTED_ORIIGINS = ["'http.//127.0.0.1:8000/"]
 
 # Application definition
 
@@ -37,7 +44,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'posts'
+    'posts',
+    'cloudinary',
+    
+    
 ]
 
 MIDDLEWARE = [
@@ -120,6 +130,12 @@ STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static']
+
+cloudinary.config( 
+  cloud_name = "difgfsvib", 
+  api_key = "127137661226246", 
+  api_secret = "bQulY62S8fnZ5Yn56RRkD6Ugy-4" 
+)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

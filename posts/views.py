@@ -1,14 +1,14 @@
-from urllib import request
-from django.http import HttpResponse
+
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from .models import Post
+from django.http import HttpResponse
 from .forms import PostForm
 # Create your views here.
 def index(request):
     #If the method is POST
     if request.method == 'POST':
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
         #If the form is valid
         if form.is_valid():
             #If yes, save
@@ -17,17 +17,24 @@ def index(request):
             return HttpResponseRedirect('/')
             #If no, show error
         else:
-            return HttpResponseRedirect(form.errors.as_json())
+            return HttpResponseRedirect('form.errors.as_json()')
 
 
     # Get all posts, limit = 20
-    posts = Post.objects.all()[:20]
-
+    posts = Post.objects.all().order_by('-created_at')[:20]
+    form=PostForm
     #show
-    return render(request, 'posts.html', {'posts': posts})
+    return render(request, 'posts.html',
+                  {'posts': posts})
 
 def delete(request, post_id):
 #Find user
  post= Post.objects.get(id=post_id)
  post.delete()
  return HttpResponseRedirect('/')
+
+def likeview(request, post_id):
+    newcount = Post.objects.get(id=post_id)
+    newcount.like_count +=1
+    newcount.save()
+    return HttpResponseRedirect('/')

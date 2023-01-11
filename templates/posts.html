@@ -4,11 +4,14 @@
 {% load static %}
 <section class="content">
     <section class="post_form">
-        <form action="/" method="POST">
-            {% csrf_token%}
+        <form action="/" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            </link>
             <input type="text" name="name" placeholder="Name" required>
-            <textarea name="body" placeholder="Tell us anything" required></textarea>
-            <input type="submit" value="Post">
+            <textarea name="body" placeholder="What's happening? " required></textarea>
+            <input type="file" id="files" name="image" required />
+        
+            <input class="submit" type="submit" value="Tweet" />
         </form>
     </section>
     <section class="posts">
@@ -20,12 +23,21 @@
                     <a href="/delete/{{ post.id }}/">Delete</a>
                 </div>
                 <div class="logo">
-                    <img src="{% static 'img/user.png' %}">
+                    <img src="{% static 'img/user.png' %}" />
                 </div>
                 <div class="name_body">
                     <div class="name">{{ post.name}} </div>
                     <div class="datetime">{{ post.created_at}} </div>
                     <p>{{ post.body }}</p>
+
+                    {% if post.image %}
+                    <img class ='post-border' src='{{ post.image.url }}'>
+                    {% endif %}
+                <div id='like-img'>
+                    <a href = '/like/{{post.id}}'><img src='/static/img/like.jpg' alt=''></a>
+                        {{post.like_count}}
+                </div>
+
                    
                 </div>
             </li>

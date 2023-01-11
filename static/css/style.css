@@ -12,7 +12,10 @@ html,body{
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
 }
-
+.content .image{
+    width: 60px;
+    height: 60px;
+}
 
 
 
@@ -84,6 +87,12 @@ POST
 .posts li .name_body .datetime{
     color: gray;
     
+}
+img.post-border{
+    width: 56%;
+}
+div#like-img img {
+    width: 7%;
 }
 @media screen and (max-width: 500px) {
     .posts li .name_body .name{
