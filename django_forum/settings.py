@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ["*"]
 X_FRAME_OPTIONS = "*"
 CORS_ORIGIN_ALLOW_ALL = TRUE
 CSRF_TRUSTED_ORIIGINS = ["'http.//127.0.0.1:8000/"]
+APPEND_SLASH=False
 
 # Application definition
 

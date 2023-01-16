@@ -17,7 +17,7 @@ def index(request):
             return HttpResponseRedirect('/')
             #If no, show error
         else:
-            return HttpResponseRedirect('form.errors.as_json()')
+            return HttpResponseRedirect(form.errors.as_json())
 
 
     # Get all posts, limit = 20
@@ -38,3 +38,17 @@ def likeview(request, post_id):
     newcount.like_count +=1
     newcount.save()
     return HttpResponseRedirect('/')
+
+def edit(request, post_id):
+    posts = Post.objects.get(id =post_id)
+    if request.method == "POST":
+        form = PostForm(request.POST, request.FILES, instance=posts)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/')
+        else:
+            return HttpResponseRedirect(form.errors.as_json())
+    form = PostForm
+    return render(request,'edit.html',{"posts":posts, 'form':form})
+            
+        

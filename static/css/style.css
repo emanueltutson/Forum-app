@@ -100,3 +100,28 @@ div#like-img img {
     }
     
 }
+
+/* Edit Page */
+
+
+h1.edit_hd {
+    text-align: center;
+}
+.inpt {
+    display: flex;
+}
+a.edit {
+    display: flex;
+}
+input#files {
+    margin-bottom: 2vw;
+}
+button.cancel {
+    width: 17vw;
+}
+button.update {
+    width: 17vw;
+}
+.buttons_update {
+    text-align: right;
+}
